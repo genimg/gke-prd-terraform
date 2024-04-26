@@ -33,7 +33,7 @@ az ad sp create-for-rbac --role="Owner" --scopes="/subscriptions/33d9474f-6004-4
 ```json {
   "appId": "488ecb0d-3c04-4078-8461-bdc5061ef51c",
   "displayName": "azure-cli-2024-02-29-22-46-53",
-  "password": "idZ8Q~xkELJRoK014_JLsWebFUGISFxCJUENnbn_",
+
   "tenant": "ce4a6448-2ace-405a-808d-6967d2758d65"
 }
 ```
