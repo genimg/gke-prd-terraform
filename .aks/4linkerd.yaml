@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    appgw.ingress.kubernetes.io/use-private-ip: "false"
+    kubernetes.io/ingress.class: azure/application-gateway
+  name: dashboard-linkerd
+  namespace: linkerd-viz
+spec:
+  rules:
+  - http:
+    paths:
+    - backend:
+      service:
+        name: web
+        port:
+          number: 8084
+      path: /*
+      pathType: Exact
