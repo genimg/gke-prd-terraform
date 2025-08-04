@@ -1,0 +1,51 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: {PROJECT_NAME}-route
+  namespace: {NAMESPACE}
+  labels:
+    expose-via-internal-gateway: "true"
+spec:
+  parentRefs:
+  - name: {PROJECT_NAME}-gateway
+    namespace: {NAMESPACE}
+  rules:
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /svc-neptuno-converter
+    filters:
+      - type: URLRewrite
+        urlRewrite:
+          path:
+            type: ReplacePrefixMatch
+            replacePrefixMatch: /
+    backendRefs:
+    - name: neptuno-sap-converter
+      port: 80
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /svc-neptuno-api
+    filters:
+      - type: URLRewrite
+        urlRewrite:
+          path:
+            type: ReplacePrefixMatch
+            replacePrefixMatch: /    
+    backendRefs:
+    - name: neptuno-sap-api
+      port: 80
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /svc-neptuno-postgrest
+    filters:
+      - type: URLRewrite
+        urlRewrite:
+          path:
+            type: ReplacePrefixMatch
+            replacePrefixMatch: /
+    backendRefs:
+    - name: neptuno-sap-postgrest
+      port: 80

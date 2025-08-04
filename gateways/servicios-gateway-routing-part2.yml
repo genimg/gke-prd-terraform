@@ -1,0 +1,207 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: servicios-routing-part2
+  namespace: {NAMESPACE}
+  labels:
+    expose-via-internal-gateway: "true"
+spec:
+  parentRefs:
+    - name: servicios-internal-gateway
+      namespace: {NAMESPACE}
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /ws-rest-financial-control-sap
+      filters:
+        - type: URLRewrite
+          urlRewrite:
+            path:
+              type: ReplacePrefixMatch
+              replacePrefixMatch: /
+      backendRefs:
+        - name: ws-rest-financial-control-sap
+          port: 80
+
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /int-ws-vales-tarjetas-consumos-comisiones
+      filters:
+        - type: URLRewrite
+          urlRewrite:
+            path:
+              type: ReplacePrefixMatch
+              replacePrefixMatch: /
+      backendRefs:
+        - name: int-ws-vales-tarjetas-consumos-comisiones
+          port: 80
+
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /int-svr-asbanc-to-sap
+      filters:
+        - type: URLRewrite
+          urlRewrite:
+            path:
+              type: ReplacePrefixMatch
+              replacePrefixMatch: /
+      backendRefs:
+        - name: int-svr-asbanc-to-sap
+          port: 80
+
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /int-ws-cargareg-tesoreria-pegasus
+      filters:
+        - type: URLRewrite
+          urlRewrite:
+            path:
+              type: ReplacePrefixMatch
+              replacePrefixMatch: /
+      backendRefs:
+        - name: int-ws-cargareg-tesoreria-pegasus
+          port: 80
+
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /ws-integracion-cn-sapfico
+      filters:
+        - type: URLRewrite
+          urlRewrite:
+            path:
+              type: ReplacePrefixMatch
+              replacePrefixMatch: /
+      backendRefs:
+        - name: ws-integracion-cn-sapfico
+          port: 80
+
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /int-ws-svr-mb-reg-venta
+      filters:
+        - type: URLRewrite
+          urlRewrite:
+            path:
+              type: ReplacePrefixMatch
+              replacePrefixMatch: /
+      backendRefs:
+        - name: int-ws-svr-mb-reg-venta
+          port: 80
+
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /int-clifre-spsa-to-sap
+      filters:
+        - type: URLRewrite
+          urlRewrite:
+            path:
+              type: ReplacePrefixMatch
+              replacePrefixMatch: /
+      backendRefs:
+        - name: int-clifre-spsa-to-sap
+          port: 80
+
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /ir-mantenimiento-fractal-api
+      filters:
+        - type: URLRewrite
+          urlRewrite:
+            path:
+              type: ReplacePrefixMatch
+              replacePrefixMatch: /
+      backendRefs:
+        - name: ir-mantenimiento-fractal-api
+          port: 80
+
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /ws-baja-activo-qimi
+      filters:
+        - type: URLRewrite
+          urlRewrite:
+            path:
+              type: ReplacePrefixMatch
+              replacePrefixMatch: /
+      backendRefs:
+        - name: ws-baja-activo-qimi
+          port: 80
+
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /ws-service-facturacion-online-axteroid
+      filters:
+        - type: URLRewrite
+          urlRewrite:
+            path:
+              type: ReplacePrefixMatch
+              replacePrefixMatch: /
+      backendRefs:
+        - name: ws-service-facturacion-online-axteroid
+          port: 80
+
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /ws-rest-host-to-web-proyeccion-caja-sap
+      filters:
+        - type: URLRewrite
+          urlRewrite:
+            path:
+              type: ReplacePrefixMatch
+              replacePrefixMatch: /
+      backendRefs:
+        - name: ws-rest-host-to-web-proyeccion-caja-sap
+          port: 80
+
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /int-ws-carga-autodetracciones
+      filters:
+        - type: URLRewrite
+          urlRewrite:
+            path:
+              type: ReplacePrefixMatch
+              replacePrefixMatch: /
+      backendRefs:
+        - name: int-ws-carga-autodetracciones
+          port: 80
+
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /int-api-crear-oc-qimi
+      filters:
+        - type: URLRewrite
+          urlRewrite:
+            path:
+              type: ReplacePrefixMatch
+              replacePrefixMatch: /
+      backendRefs:
+        - name: int-api-crear-oc-qimi
+          port: 80
+
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /ws-rest-logesfin-sap
+      filters:
+        - type: URLRewrite
+          urlRewrite:
+            path:
+              type: ReplacePrefixMatch
+              replacePrefixMatch: /
+      backendRefs:
+        - name: ws-rest-logesfin-sap
+          port: 80

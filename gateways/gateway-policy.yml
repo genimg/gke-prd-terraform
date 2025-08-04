@@ -1,0 +1,12 @@
+apiVersion: networking.gke.io/v1
+kind: GCPGatewayPolicy
+metadata:
+  name: {PROJECT_NAME}-access-policy
+  namespace: {NAMESPACE}
+spec:
+  default:
+    allowGlobalAccess: true
+  targetRef:
+    group: gateway.networking.k8s.io
+    kind: Gateway
+    name: {PROJECT_NAME}-gateway

@@ -1,0 +1,235 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: servicios-routing-part1
+  namespace: {NAMESPACE}
+  labels:
+    expose-via-internal-gateway: "true"
+spec:
+  parentRefs:
+    - name: servicios-internal-gateway
+      namespace: {NAMESPACE}
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /int-api-creacion-material
+      filters:
+        - type: URLRewrite
+          urlRewrite:
+            path:
+              type: ReplacePrefixMatch
+              replacePrefixMatch: /
+      backendRefs:
+        - name: int-api-creacion-material
+          port: 80
+
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /int-src-ws-soap
+      filters:
+        - type: URLRewrite
+          urlRewrite:
+            path:
+              type: ReplacePrefixMatch
+              replacePrefixMatch: /
+      backendRefs:
+        - name: int-src-ws-soap
+          port: 80
+
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /int-ws-mant-proveedor
+      filters:
+        - type: URLRewrite
+          urlRewrite:
+            path:
+              type: ReplacePrefixMatch
+              replacePrefixMatch: /
+      backendRefs:
+        - name: int-ws-mant-proveedor
+          port: 80
+
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /ws-datamart-gastos-ingresos
+      filters:
+        - type: URLRewrite
+          urlRewrite:
+            path:
+              type: ReplacePrefixMatch
+              replacePrefixMatch: /
+      backendRefs:
+        - name: ws-datamart-gastos-ingresos
+          port: 80
+
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /ws-rest-maestros-sap
+      filters:
+        - type: URLRewrite
+          urlRewrite:
+            path:
+              type: ReplacePrefixMatch
+              replacePrefixMatch: /
+      backendRefs:
+        - name: ws-rest-maestros-sap
+          port: 80
+
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /int-sap-send-post-interface-to-swli
+      filters:
+        - type: URLRewrite
+          urlRewrite:
+            path:
+              type: ReplacePrefixMatch
+              replacePrefixMatch: /
+      backendRefs:
+        - name: int-sap-send-post-interface-to-swli
+          port: 80
+
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /int-ws-send-post-interface-to-wms
+      filters:
+        - type: URLRewrite
+          urlRewrite:
+            path:
+              type: ReplacePrefixMatch
+              replacePrefixMatch: /
+      backendRefs:
+        - name: int-ws-send-post-interface-to-wms
+          port: 80
+
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /ws-rest-consulta-proveedores-sap
+      filters:
+        - type: URLRewrite
+          urlRewrite:
+            path:
+              type: ReplacePrefixMatch
+              replacePrefixMatch: /
+      backendRefs:
+        - name: ws-rest-consulta-proveedores-sap
+          port: 80
+
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /ws-est-conciliacion-oc-b2b
+      filters:
+        - type: URLRewrite
+          urlRewrite:
+            path:
+              type: ReplacePrefixMatch
+              replacePrefixMatch: /
+      backendRefs:
+        - name: ws-est-conciliacion-oc-b2b
+          port: 80
+
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /int-ws-cargareg-tesoreria
+      filters:
+        - type: URLRewrite
+          urlRewrite:
+            path:
+              type: ReplacePrefixMatch
+              replacePrefixMatch: /
+      backendRefs:
+        - name: int-ws-cargareg-tesoreria
+          port: 80
+
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /ws-sap-factoring
+      filters:
+        - type: URLRewrite
+          urlRewrite:
+            path:
+              type: ReplacePrefixMatch
+              replacePrefixMatch: /
+      backendRefs:
+        - name: ws-sap-factoring
+          port: 80
+
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /ws-service-facturacion-online
+      filters:
+        - type: URLRewrite
+          urlRewrite:
+            path:
+              type: ReplacePrefixMatch
+              replacePrefixMatch: /
+      backendRefs:
+        - name: ws-service-facturacion-online
+          port: 80
+
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /ws-solpeweb-mailer
+      filters:
+        - type: URLRewrite
+          urlRewrite:
+            path:
+              type: ReplacePrefixMatch
+              replacePrefixMatch: /
+      backendRefs:
+        - name: ws-solpeweb-mailer
+          port: 80
+
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /int-ws-sync-softexp-sap
+      filters:
+        - type: URLRewrite
+          urlRewrite:
+            path:
+              type: ReplacePrefixMatch
+              replacePrefixMatch: /
+      backendRefs:
+        - name: int-ws-sync-softexp-sap
+          port: 80
+
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /int-ws-ticketera-asbanc
+      filters:
+        - type: URLRewrite
+          urlRewrite:
+            path:
+              type: ReplacePrefixMatch
+              replacePrefixMatch: /
+      backendRefs:
+        - name: int-ws-ticketera-asbanc
+          port: 80
+
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /ws-ocweb-mailer
+      filters:
+        - type: URLRewrite
+          urlRewrite:
+            path:
+              type: ReplacePrefixMatch
+              replacePrefixMatch: /
+      backendRefs:
+        - name: ws-ocweb-mailer
+          port: 80

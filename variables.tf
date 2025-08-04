@@ -68,3 +68,44 @@ variable "aks_main_network_profile_load_balancer_sku" {}
 variable "aks_main_identity_type" {}
 variable "aks_main_azure_policy_enabled" {}
 variable "aks_main_tags" {}
+
+# GCP / GKE
+variable "gcp_project_id" {}
+
+variable "gke_main_cluster_name" {}
+variable "gke_main_location" {}
+variable "gke_main_network" {}
+variable "gke_main_subnetwork" {}
+variable "gke_main_node_pools" {
+  type = list(object({
+    name           = string
+    machine_type   = string
+    min_count      = number
+    max_count      = number
+    disk_size_gb   = number
+    labels         = map(string)
+    taints         = list(object({
+      key    = string
+      value  = string
+      effect = string
+    }))
+  }))
+}
+
+variable "gke_main_tags" {
+  type = map(string)
+}
+
+# Bastion GCP
+variable "bastion_gcp_instance_name" {}
+variable "bastion_gcp_zone" {}
+variable "bastion_gcp_machine_type" {}
+variable "bastion_gcp_network" {}
+variable "bastion_gcp_subnetwork" {}
+variable "bastion_gcp_disk_size_gb" {
+  default = 20
+}
+variable "bastion_gcp_tags" {
+  type    = list(string)
+  default = ["bastion"]
+}

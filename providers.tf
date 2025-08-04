@@ -1,22 +1,25 @@
 terraform {
   required_providers {
-    azurerm = {
-      source  = "hashicorp/azurerm"
-      version = "=3.85.0"
+    
+    google = {
+      source  = "hashicorp/google"
+      version = "~> 5.0"
     }
   }
-  backend "azurerm" {
-    subscription_id      = "33d9474f-6004-49f1-a25a-4d8cc8912608"
-    resource_group_name  = "d-vuelo-st-rg-eus2-e59p"
-    storage_account_name = "dvuelosteus21r4d"
-    container_name       = "tfstate"
-    key                  = "terraform.tfstate"
+  backend "gcs" {
+    bucket  = "<YOUR_STATE_BUCKET>"
+    prefix  = "terraform/state"
+  }
+
   }
 }
 
 provider "random" {}
 
-provider "azurerm" {
-  skip_provider_registration = true 
-  features {}
+
+
+# Google provider configuration
+provider "google" {
+  project = var.gcp_project_id
+  region  = var.gke_main_location
 }
