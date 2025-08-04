@@ -1,0 +1,19 @@
+module "gateway_default" {
+  source                           = "./modules/gateway"
+  gateway_name                     = var.gateway_default_name
+  gateway_ngs_name                 = var.gateway_default_nsg_name
+  gateway_sku_name                 = var.gateway_default_sku_name
+  gateway_sku_tier                 = var.gateway_default_sku_tier
+  gateway_min_capacity             = var.gateway_default_min_capacity
+  gateway_max_capacity             = var.gateway_default_max_capacity
+  gateway_ip_configuration         = var.gateway_default_ip_configuration
+  gateway_ngs_allow_apim_public_ip = module.apim_default.public_ip[0]
+  subnet_name                      = var.gateway_default_subnet_name
+  subnet_address_prefixes          = var.gateway_default_subnet_address_prefixes
+  subnet_virtual_network_name      = module.virtual_network_spoke_1.name
+  public_ip_name                   = var.gateway_default_public_ip_name
+  public_ip_allocation_method      = var.gateway_default_public_ip_allocation_method
+  public_ip_sku                    = var.gateway_default_public_ip_sku
+  resource_group_location          = module.resource_group_spoke_1.location
+  resource_group_name              = module.resource_group_spoke_1.name
+}
