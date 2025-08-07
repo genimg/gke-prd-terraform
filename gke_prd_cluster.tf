@@ -4,29 +4,34 @@ resource "google_container_cluster" "sap_prd" {
   name     = "integration-sap-prd-cluster"
   location = "southamerica-west1"
 
-  release_channel { channel = "regular" }
+  release_channel { channel = "STABLE" }
   networking_mode = "VPC_NATIVE"
 
-  network    = "projects/${var.host_project_id}/global/networks/vpc-irmabo-integraciones-sap"
-  subnetwork = "projects/${var.host_project_id}/regions/southamerica-west1/subnetworks/p-irmabo-integraciones-sap-subred1"
+  network    = data.google_compute_subnetwork.sap_prd_subnet.network
+  subnetwork = data.google_compute_subnetwork.sap_prd_subnet.self_link
 
   ip_allocation_policy {
-    cluster_secondary_range_name  = "sap-prd-pods"
-    services_secondary_range_name = "sap-prd-services"
+    cluster_secondary_range_name  = "alias-pods-prd"
+    services_secondary_range_name = "alias-services-prd"
   }
 
   private_cluster_config {
     enable_private_nodes   = true
-    master_ipv4_cidr_block = "10.253.11.0/28"
-    enable_private_endpoint = true
+    enable_private_endpoint = false
     master_global_access_config { enabled = false }
   }
 
-  addons_config {
-    gke_gateway_config { channel = "CHANNEL_STANDARD" }
+  master_authorized_networks_config {
+    cidr_blocks {
+      cidr_block   = "10.253.0.0/16"   # toda tu VPC compartida
+      display_name = "vpc-interna"
+    }
   }
 
+  gateway_api_config { channel = "CHANNEL_STANDARD" }
+
   remove_default_node_pool = true
+  initial_node_count = 1
   lifecycle {
     ignore_changes = [maintenance_policy]
   }

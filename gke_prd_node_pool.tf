@@ -6,7 +6,7 @@ resource "google_container_node_pool" "sap_prd_np" {
   location   = google_container_cluster.sap_prd.location
 
   node_config {
-    machine_type    = "e2-standard-4"
+    machine_type    = "n2-standard-4"
     service_account = var.nodes_sa_email
     oauth_scopes    = ["https://www.googleapis.com/auth/cloud-platform"]
   }

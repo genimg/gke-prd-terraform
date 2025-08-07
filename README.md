@@ -9,3 +9,28 @@
 - gateway.tf: Se implementa el Application Gateway
 - hub.tf: Se implementa el hub
 - spoke.tf: Se implementan los spokes
+
+
+## Auth
+
+```bash
+gcloud auth application-default login
+```
+
+## Plan
+
+```bash
+terraform plan -var-file prod.tfvars -out prod.tfplan
+```
+
+## Apply
+
+```bash
+terraform apply prod.tfplan
+```
+
+## Destroy
+
+```bash
+terraform destroy -var-file prod.tfvars
+```
